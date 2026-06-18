@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "glazed",
+  "version": "1.21.4-n-16.1",
+  "name": "Glazed",
+  "description": "An Addon made for donutsmp",
+  "authors": [
+    "nnpg"
+  ],
+  "contact": {
+    "homepage": "https://glazedclient.com",
+    "repo": "https://github.com/realnnpg/",
+    "discord": "https://discord.gg/glazedclient"
+  },
+  "license": "All Rights Reserved",
+  "icon": "assets/template/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "com.nnpg.glazed.GlazedAddon"
+    ],
+    "mixinsquared": [
+      "com.nnpg.glazed.mixin.MeteorMixinCanceller"
+    ]
+  },
+  "mixins": [
+    "mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "225,25,25",
+    "modmenu": {
+      "links": {
+        "modmenu.website": "https://glazedclient.com",
+        "modmenu.discord": "https://discord.gg/glazedclient"
+      }
+    }
+  },
+  "depends": {
+    "java": "\u003e\u003d21",
+    "minecraft": [
+      "1.21.4"
+    ],
+    "meteor-client": "*"
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/mixinsquared-fabric-0.3.7-beta.1.jar"
+    }
+  ]
+}
