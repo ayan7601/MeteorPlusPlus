@@ -5,6 +5,7 @@ import org.joml.Vector3d;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -16,7 +17,7 @@ public final class Utils {
 
     public static void overwriteFile(String urlString, File targetFile) {
         try {
-            URL url = new URL(urlString);
+            URL url = URI.create(urlString).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(5000);

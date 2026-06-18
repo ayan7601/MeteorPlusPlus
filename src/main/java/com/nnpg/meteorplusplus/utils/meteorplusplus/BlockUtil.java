@@ -3,7 +3,6 @@ package com.nnpg.meteorplusplus.utils.meteorplusplus;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RespawnAnchorBlock;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -49,12 +48,12 @@ public final class BlockUtil {
 
     public static boolean isRespawnAnchorCharged(final BlockPos blockPos) {
         return isBlockAtPosition(blockPos, Blocks.RESPAWN_ANCHOR) &&
-            (int) mc.world.getBlockState(blockPos).get((Property) RespawnAnchorBlock.CHARGES) != 0;
+            mc.world.getBlockState(blockPos).get(RespawnAnchorBlock.CHARGES) != 0;
     }
 
     public static boolean isRespawnAnchorUncharged(final BlockPos blockPos) {
         return isBlockAtPosition(blockPos, Blocks.RESPAWN_ANCHOR) &&
-            (int) mc.world.getBlockState(blockPos).get((Property) RespawnAnchorBlock.CHARGES) == 0;
+            mc.world.getBlockState(blockPos).get(RespawnAnchorBlock.CHARGES) == 0;
     }
 
     public static void interactWithBlock(final BlockHitResult blockHitResult, final boolean shouldSwingHand) {

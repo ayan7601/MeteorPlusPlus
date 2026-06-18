@@ -303,8 +303,10 @@ public class HoleTunnelStairsESP extends Module {
                 long key = ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4);
                 // Count underground block updates per chunk.  Trigger a rescan
                 // only when the count crosses the configured threshold.
-                int count = undergroundUpdateCounts.merge(key, 1, Integer::sum);
-                if (count >= undergroundUpdateThreshold.get()) {
+                Integer count = undergroundUpdateCounts.compute(key, (chunkKey, currentCount) ->
+                    currentCount == null ? 1 : currentCount + 1
+                );
+                if (count != null && count >= undergroundUpdateThreshold.get()) {
                     undergroundUpdateCounts.remove(key);
                     synchronized (chunks) {
                         if (chunks.containsKey(key)) {
@@ -914,23 +916,15 @@ public class HoleTunnelStairsESP extends Module {
     private static class DiagonalTunnelBox {
         public final Box box;
         public final int x, y, z;      // Grid position
-        public final int width, height;
-        public final Direction dir;    // Primary direction
-        public final boolean turnRight;
         
         // Neighbor flags - true if another tunnel segment is adjacent on this side
         public boolean hasNegX, hasPosX, hasNegY, hasPosY, hasNegZ, hasPosZ;
         
-        public DiagonalTunnelBox(Box box, int x, int y, int z, int width, int height, 
-                                  Direction dir, boolean turnRight) {
+        public DiagonalTunnelBox(Box box, int x, int y, int z) {
             this.box = box;
             this.x = x;
             this.y = y;
             this.z = z;
-            this.width = width;
-            this.height = height;
-            this.dir = dir;
-            this.turnRight = turnRight;
         }
         
         /**
@@ -964,7 +958,7 @@ public class HoleTunnelStairsESP extends Module {
                         int gy = fill.getY();
                         int gz = fill.getZ();
                         
-                        DiagonalTunnelBox dtb = new DiagonalTunnelBox(box, gx, gy, gz, w, height, checkDir, turnRight);
+                        DiagonalTunnelBox dtb = new DiagonalTunnelBox(box, gx, gy, gz);
                         potential.add(dtb);
                         
                         visited.set(getLocalIndex(fill.getX() & 15, fill.getY(), fill.getZ() & 15, yMin));
@@ -1034,9 +1028,8 @@ public class HoleTunnelStairsESP extends Module {
 
     private static class CoveredHoleInfo {
         public final BlockPos coverPos;
-        public final Box holeBox;
-        public CoveredHoleInfo(BlockPos coverPos, Box holeBox) {
-            this.coverPos = coverPos; this.holeBox = holeBox;
+        public CoveredHoleInfo(BlockPos coverPos) {
+            this.coverPos = coverPos;
         }
     }
 
@@ -1046,7 +1039,7 @@ public class HoleTunnelStairsESP extends Module {
         if (isSolidBlockCached(topPos)) {
             boolean isPlayerCovered = !onlyPlayerCovered.get() || isLikelyPlayerCovered(topPos, holeBox);
             if (isPlayerCovered) {
-                CoveredHoleInfo info = new CoveredHoleInfo(topPos, holeBox);
+                CoveredHoleInfo info = new CoveredHoleInfo(topPos);
                 coveredHoles.put(holeBox, info);
                 if (chatNotifications.get() && notifiedHoles.add(holeBox)) {
                     int depth = (int) (holeBox.maxY - holeBox.minY);

@@ -1,9 +1,6 @@
 package com.nnpg.meteorplusplus.mixin.protection;
 
-import com.nnpg.meteorplusplus.protection.ModRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.server.ServerResourcePackLoader;
-import net.minecraft.resource.ResourcePackProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +9,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+import java.net.URL;
+import java.nio.file.Path;
+import java.util.UUID;
 
 @Mixin(ServerResourcePackLoader.class)
 public class ServerResourcePackLoaderMixin {
@@ -21,31 +20,50 @@ public class ServerResourcePackLoaderMixin {
     private static final Logger LOGGER = LoggerFactory.getLogger("MeteorPlusPlus-Protection");
 
     @Inject(
-        method = "loadServerPack(Lnet/minecraft/resource/ResourcePackProfile;Ljava/util/List;)V",
+        method = "addResourcePack(Ljava/util/UUID;Ljava/net/URL;Ljava/lang/String;)V",
         at = @At("HEAD"),
         require = 0
     )
-    private static void meteorplusplus$onServerPackLoad(
-            ResourcePackProfile profile,
-            List<ResourcePackProfile> profiles,
-            CallbackInfo ci) {
+    private void meteorplusplus$onServerPackUrlLoad(UUID id, URL url, String hash, CallbackInfo ci) {
         try {
-            LOGGER.info("[MeteorPlusPlus Protection] Server resource pack loading: {}",
-                profile != null ? profile.getId() : "unknown");
+            LOGGER.info("[MeteorPlusPlus Protection] Server resource pack loading: {}", id);
         } catch (Throwable t) {
             LOGGER.error("[MeteorPlusPlus Protection] Error in server pack load", t);
         }
     }
 
     @Inject(
-        method = "loadServerPack(Lnet/minecraft/resource/ResourcePackProfile;Ljava/util/List;)V",
+        method = "addResourcePack(Ljava/util/UUID;Ljava/net/URL;Ljava/lang/String;)V",
         at = @At("RETURN"),
         require = 0
     )
-    private static void meteorplusplus$afterServerPackLoad(
-            ResourcePackProfile profile,
-            List<ResourcePackProfile> profiles,
-            CallbackInfo ci) {
+    private void meteorplusplus$afterServerPackUrlLoad(UUID id, URL url, String hash, CallbackInfo ci) {
+        try {
+            LOGGER.info("[MeteorPlusPlus Protection] Server resource pack load complete");
+        } catch (Throwable t) {
+            LOGGER.error("[MeteorPlusPlus Protection] Error after server pack load", t);
+        }
+    }
+
+    @Inject(
+        method = "addResourcePack(Ljava/util/UUID;Ljava/nio/file/Path;)V",
+        at = @At("HEAD"),
+        require = 0
+    )
+    private void meteorplusplus$onServerPackFileLoad(UUID id, Path path, CallbackInfo ci) {
+        try {
+            LOGGER.info("[MeteorPlusPlus Protection] Server resource pack loading: {}", id);
+        } catch (Throwable t) {
+            LOGGER.error("[MeteorPlusPlus Protection] Error in server pack load", t);
+        }
+    }
+
+    @Inject(
+        method = "addResourcePack(Ljava/util/UUID;Ljava/nio/file/Path;)V",
+        at = @At("RETURN"),
+        require = 0
+    )
+    private void meteorplusplus$afterServerPackFileLoad(UUID id, Path path, CallbackInfo ci) {
         try {
             LOGGER.info("[MeteorPlusPlus Protection] Server resource pack load complete");
         } catch (Throwable t) {

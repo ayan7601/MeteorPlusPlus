@@ -50,10 +50,7 @@ public abstract class TranslatableTextContentMixin {
     private static final String GLAZED_ALLOW_ORIGINAL = "\0__meteorplusplus_allow__";
 
     @WrapOperation(
-        method = {
-            "decompose(Lnet/minecraft/text/LanguageVisitor;Lnet/minecraft/text/Style;)Ljava/util/Optional;",
-            "updateTranslations()V"
-        },
+        method = "updateTranslations()V",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/util/Language;get(Ljava/lang/String;)Ljava/lang/String;"),
         require = 0
@@ -72,10 +69,7 @@ public abstract class TranslatableTextContentMixin {
     }
 
     @WrapOperation(
-        method = {
-            "decompose(Lnet/minecraft/text/LanguageVisitor;Lnet/minecraft/text/Style;)Ljava/util/Optional;",
-            "updateTranslations()V"
-        },
+        method = "updateTranslations()V",
         at = @At(value = "INVOKE",
             target = "Lnet/minecraft/util/Language;get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;"),
         require = 0

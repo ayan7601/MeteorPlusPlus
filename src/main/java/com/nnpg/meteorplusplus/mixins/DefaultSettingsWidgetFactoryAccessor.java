@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Map;
 
-@Mixin(SettingsWidgetFactory.class)
+@Mixin(value = SettingsWidgetFactory.class, remap = false)
 public interface DefaultSettingsWidgetFactoryAccessor {
-    @Accessor("factories")
+    @Accessor(value = "factories", remap = false)
     Map<Class<?>, SettingsWidgetFactory.Factory> getFactories();
 }

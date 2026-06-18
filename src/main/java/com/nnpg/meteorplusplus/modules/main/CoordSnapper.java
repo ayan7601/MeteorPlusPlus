@@ -9,7 +9,9 @@ import net.minecraft.util.math.BlockPos;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 public class CoordSnapper extends Module {
@@ -88,7 +90,7 @@ public class CoordSnapper extends Module {
     private void sendWebhook(int x, int y, int z) {
         new Thread(() -> {
             try {
-                URL url = new URL(webhookUrl.get());
+                URL url = URI.create(webhookUrl.get()).toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -119,7 +121,7 @@ public class CoordSnapper extends Module {
                 json.add("embeds", embeds);
 
                 try (OutputStream os = connection.getOutputStream()) {
-                    byte[] input = json.toString().getBytes("utf-8");
+                    byte[] input = json.toString().getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
 

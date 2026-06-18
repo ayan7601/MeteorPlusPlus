@@ -18,10 +18,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(DefaultSettingsWidgetFactory.class)
+@Mixin(value = DefaultSettingsWidgetFactory.class, remap = false)
 public class DefaultSettingsWidgetFactoryMixin {
 
-    @Inject(method = "<init>(Lmeteordevelopment/meteorclient/gui/GuiTheme;)V", at = @At("TAIL"))
+    @Inject(method = "<init>(Lmeteordevelopment/meteorclient/gui/GuiTheme;)V", at = @At("TAIL"), remap = false)
     private void addRandomBetweenFactories(GuiTheme theme, CallbackInfo ci) {
         DefaultSettingsWidgetFactory factory = (DefaultSettingsWidgetFactory) (Object) this;
         DefaultSettingsWidgetFactoryAccessor accessor = (DefaultSettingsWidgetFactoryAccessor) factory;
