@@ -1,22 +1,22 @@
 <!-- markdownlint-disable MD022 MD033 MD060 -->
 
-# Glazed
+# MeteorPlusPlus
 <p align="center">
-  <img src="https://nnpg.dev/Glazedlogo.png" alt="Glazed Addon Banner" width="300"/>
+  <img src="https://nnpg.dev/MeteorPlusPluslogo.png" alt="MeteorPlusPlus Addon Banner" width="300"/>
 </p>
 
 <p align="center">
-  <a href="https://github.com/realnnpg/Glazed/releases"><img src="https://img.shields.io/github/downloads/realnnpg/Glazed/total.svg?style=for-the-badge&label=Downloads" alt="Downloads"/></a>
-  <img src="https://img.shields.io/github/stars/realnnpg/Glazed?style=for-the-badge" alt="Stars"/>
-  <img src="https://img.shields.io/github/repo-size/realnnpg/Glazed?style=for-the-badge" alt="Repo Size"/>
-  <a href="https://discord.gg/glazed"><img src="https://img.shields.io/discord/1282076342908747879?color=%237289DA&label=Discord&logo=discord&logoColor=white&style=for-the-badge" alt="Discord"/></a>
+  <a href="https://github.com/realnnpg/MeteorPlusPlus/releases"><img src="https://img.shields.io/github/downloads/realnnpg/MeteorPlusPlus/total.svg?style=for-the-badge&label=Downloads" alt="Downloads"/></a>
+  <img src="https://img.shields.io/github/stars/realnnpg/MeteorPlusPlus?style=for-the-badge" alt="Stars"/>
+  <img src="https://img.shields.io/github/repo-size/realnnpg/MeteorPlusPlus?style=for-the-badge" alt="Repo Size"/>
+  <a href="https://discord.gg/meteorplusplus"><img src="https://img.shields.io/discord/1282076342908747879?color=%237289DA&label=Discord&logo=discord&logoColor=white&style=for-the-badge" alt="Discord"/></a>
 </p>
 
 ---
 
 ## 🍩DonutSMP Meteor Client Addon
 
-**Glazed** is a free Meteor Client addon designed specifically for the **DonutSMP** server. I made this to automate the boring and repetitive tasks I kept doing in-game and to give others access to high-quality tools **without paying**. I've seen many paid clients that do less than this one — this is my free alternative.
+**MeteorPlusPlus** is a free Meteor Client addon designed specifically for the **DonutSMP** server. I made this to automate the boring and repetitive tasks I kept doing in-game and to give others access to high-quality tools **without paying**. I've seen many paid clients that do less than this one — this is my free alternative.
 
 **78 modules** across 3 categories. Minecraft **1.21.8, 1.21.10, 1.21.11**.
 
@@ -84,7 +84,7 @@
 | Deepslate ESP | ESP for deepslate variants |
 | Dripstone ESP | Detects long dripstones with threading |
 | Drowned Trident ESP | Highlights drowned with tridents |
-| Fake Scoreboard | Custom Glazed scoreboard overlay |
+| Fake Scoreboard | Custom MeteorPlusPlus scoreboard overlay |
 | Hole Tunnel Stairs ESP | Highlights holes, tunnels, stairs |
 | Invis ESP | 3D hitbox rendering for invisible players and mobs |
 | Kelp ESP | Highlights suspicious kelp chunk patterns |
@@ -123,7 +123,7 @@
 
 ## 🔗Great Modules to Pair With This Addon
 
-Pair your Glazed setup with these built-in Meteor modules for max efficiency:
+Pair your MeteorPlusPlus setup with these built-in Meteor modules for max efficiency:
 
 - `Auto Replenish` – Automatically restocks blocks/tools
 - `Auto Eat` – Keeps your hunger up
@@ -161,7 +161,7 @@ Pair your Glazed setup with these built-in Meteor modules for max efficiency:
 <details>
   <summary><strong>🛠️How do I get updates?</strong></summary>
   <p>
-    Join the <a href="https://discord.gg/glazed">Discord server</a> for update announcements, changelogs, and early access to new modules. You can also star/watch the GitHub repo.
+    Join the <a href="https://discord.gg/meteorplusplus">Discord server</a> for update announcements, changelogs, and early access to new modules. You can also star/watch the GitHub repo.
   </p>
 </details>
 
@@ -169,7 +169,7 @@ Pair your Glazed setup with these built-in Meteor modules for max efficiency:
 
 ## 📢Join the Discord
 
-> 💬**[Join the Discord](https://discord.gg/glazed)** for:
+> 💬**[Join the Discord](https://discord.gg/meteorplusplus)** for:
 >
 > - 💸Giveaways
 > - 📢Announcements

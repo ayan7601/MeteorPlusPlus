@@ -16,8 +16,8 @@
     "1.21.11"
   ],
   "icon": "https://i.imgur.com/OL2y1cr.png",
-  "discord": "https://discord.gg/glazed",
-  "homepage": "https://glazedclient.com",
+  "discord": "https://discord.gg/meteorplusplus",
+  "homepage": "https://meteorplusplusclient.com",
   "feature_directories": {
     "modules": [
       "modules/main",

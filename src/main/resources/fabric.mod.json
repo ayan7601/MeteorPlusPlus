@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "glazed",
+  "id": "meteorplusplus",
   "version": "${version}",
-  "name": "Glazed",
+  "name": "MeteorPlusPlus",
   "description": "An Addon made for donutsmp",
   "authors": ["nnpg"],
   "contact": {
-    "homepage": "https://glazedclient.com",
+    "homepage": "https://meteorplusplusclient.com",
     "repo": "https://github.com/realnnpg/",
-    "discord": "https://discord.gg/glazed"
+    "discord": "https://discord.gg/meteorplusplus"
   },
   "license": "All Rights Reserved",
   "icon": "assets/template/icon.png",
   "environment": "client",
   "entrypoints": {
-    "meteor": ["com.nnpg.glazed.GlazedAddon"],
-    "mixinsquared": ["com.nnpg.glazed.mixin.MeteorMixinCanceller"]
+    "meteor": ["com.nnpg.meteorplusplus.MeteorPlusPlusAddon"],
+    "mixinsquared": ["com.nnpg.meteorplusplus.mixin.MeteorMixinCanceller"]
   },
-  "mixins": ["glazed-mixins.json", "glazed-mixin.json"],
+  "mixins": ["meteorplusplus-mixins.json", "meteorplusplus-mixin.json"],
   "custom": {
     "meteor-client:color": "225,25,25",
     "modmenu": {
       "links": {
-        "modmenu.website": "https://glazedclient.com",
-        "modmenu.discord": "https://discord.gg/glazed"
+        "modmenu.website": "https://meteorplusplusclient.com",
+        "modmenu.discord": "https://discord.gg/meteorplusplus"
       }
     }
   },
