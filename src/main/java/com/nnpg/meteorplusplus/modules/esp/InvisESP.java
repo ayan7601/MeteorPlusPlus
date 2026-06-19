@@ -27,17 +27,6 @@ public class InvisESP extends Module {
         .build()
     );
     
-    private final Setting<Double> lineWidth = sgGeneral.add(new DoubleSetting.Builder()
-        .name("line-width")
-        .description("Thickness of the box lines")
-        .defaultValue(2.0)
-        .min(0.1)
-        .max(10.0)
-        .sliderMax(5.0)
-        .visible(() -> shapeMode.get() != ShapeMode.Sides)
-        .build()
-    );
-    
     private final Setting<Double> fadeDistance = sgGeneral.add(new DoubleSetting.Builder()
         .name("fade-distance")
         .description("Distance at which boxes start to fade (0 = no fade)")
@@ -144,7 +133,7 @@ public class InvisESP extends Module {
 
         for (Entity entity : mc.world.getEntities()) {
             // Skip if not a living entity
-            if (!(entity instanceof LivingEntity livingEntity)) continue;
+            if (!(entity instanceof LivingEntity)) continue;
             
             // Skip self if disabled
             if (entity == mc.player && !showSelf.get()) continue;

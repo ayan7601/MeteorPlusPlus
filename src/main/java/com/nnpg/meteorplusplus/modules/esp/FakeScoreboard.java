@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FakeScoreboard extends Module {
-    private static final String SCOREBOARD_NAME = "meteorplusplus_custom";
+    private static final String SCOREBOARD_NAME = "MeteorPlusPlus";
     private ScoreboardObjective customObjective;
     private ScoreboardObjective originalObjective;
     private final MinecraftClient mc = MinecraftClient.getInstance();
@@ -27,9 +27,6 @@ public class FakeScoreboard extends Module {
 
     private long keyallStartTime = 0;
     private long keyallInitialTime = 0;
-    private long lastMsUpdate = 0;
-    private int displayMs = 0;
-    private int msChangeDirection = 1;
     private long lastScoreboardUpdate = 0;
 
     private final SettingGroup sgStats = settings.getDefaultGroup();
@@ -116,10 +113,7 @@ public class FakeScoreboard extends Module {
 
         originalObjective = scoreboard.getObjectiveForSlot(ScoreboardDisplaySlot.SIDEBAR);
         keyallStartTime = System.currentTimeMillis();
-        keyallInitialTime = 59 * 60 + 59; // 3599 seconds
-        lastMsUpdate = System.currentTimeMillis();
-        displayMs = 50 + (int) (Math.random() * 50);
-        msChangeDirection = (Math.random() < 0.5) ? 1 : -1;
+        keyallInitialTime = parseKeyallInitialTime(keyall.get());
         updateScoreboard();
     }
 
@@ -216,10 +210,18 @@ public class FakeScoreboard extends Module {
     }
 
     private int getRealPing() {
-        if (mc.player == null || mc.getNetworkHandler() == null) return 0;
+        if (mc.world == null || mc.player == null || mc.isInSingleplayer() || mc.getNetworkHandler() == null) return 0;
 
         PlayerListEntry entry = mc.getNetworkHandler().getPlayerListEntry(mc.player.getUuid());
         return entry != null ? entry.getLatency() : 0;
+    }
+
+    private long parseKeyallInitialTime(String value) {
+        try {
+            return Math.max(0L, Long.parseLong(value.trim()));
+        } catch (NumberFormatException ignored) {
+            return 59 * 60 + 59;
+        }
     }
 
     private String getKeyallTimer() {
@@ -233,28 +235,7 @@ public class FakeScoreboard extends Module {
         return String.format("%dm %ds", minutes, seconds);
     }
 
-    private String getFooterWithMs() {
-        long currentTime = System.currentTimeMillis();
-        
-        if (currentTime - lastMsUpdate > 2000 + (long)(Math.random() * 2000)) {
-            int change = 1 + (int)(Math.random() * 5);
-            displayMs += msChangeDirection * change;
-            
-            if (displayMs < 20) {
-                displayMs = 20;
-                msChangeDirection = 1;
-            } else if (displayMs > 150) {
-                displayMs = 150;
-                msChangeDirection = -1;
-            }
-            
-            if (Math.random() < 0.1) {
-                msChangeDirection *= -1;
-            }
-            
-            lastMsUpdate = currentTime;
-        }
-
+    private String getFooterWithPing() {
         String raw = footer.get();
         int start = raw.indexOf('(');
         int end = raw.indexOf(')');
@@ -264,7 +245,7 @@ public class FakeScoreboard extends Module {
         }
 
         String region = raw.substring(0, start).trim();
-        return region + "(" + displayMs + "ms)";
+        return region + "(" + getRealPing() + "ms)";
     }
 
     private List<MutableText> generateEntriesText() {
@@ -283,7 +264,7 @@ public class FakeScoreboard extends Module {
     }
 
     private MutableText footerText() {
-        String raw = getFooterWithMs();
+        String raw = getFooterWithPing();
 
         int start = raw.indexOf('(');
         int end = raw.indexOf(')');
